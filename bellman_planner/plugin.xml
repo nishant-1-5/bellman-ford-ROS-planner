@@ -1,0 +1,6 @@
+<library path="lib/libcustom_bellman_planner">
+  <class name="custom_bellman_planner::BellmanFord" type="custom_bellman_planner::BellmanFord" base_class_type="nav_core::BaseLocalPlanner">
+    <description>Bellman-Ford Local Planner</description>
+  </class>
+</library>
+
