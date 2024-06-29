@@ -37,9 +37,61 @@ Replace
 ```
 with 
 ```    
-<rosparam file="$(find turtlebot3_navigation)/param/bellman_ford_planner_params.yaml" command="load" />
+<rosparam file="$(find bellman_planner)/param/bellman_ford_planner_params.yaml" command="load" />
 ```
+and so on..
 
+map file loc is specified by default in launch file 
+map made with [This repo](https://github.com/marinaKollmitz/gazebo_ros_2Dmap_plugin).
+
+## BELLMAN-FORD-Algorithm
+It is a dynamic-programming based approach to find the shortest path in a graph, main use case of Bellman-Ford algorithm is when the graph contains negative weights where dijktras algorithm has undefined behaviour. It is also used to find if the graph contains cyle of Edges whose sum of weights in negative i.e. a negative weight cycle.
+
+The algoriths is as follows:-
+
+### Bellman-Ford(E, V, s):
+
+#### Input:
+
+    E: List of edges in the graph, where each edge is represented as a tuple (u, v, w) indicating an edge from vertex uu to vertex vv with weight ww.
+    V: List of vertices in the graph.
+    s: The source vertex from which shortest paths are to be calculated.
+
+#### Output:
+
+    Distance array dist[] where dist[v] is the shortest distance from source s to vertex v.
+    Predecessor array pred[] to reconstruct the shortest paths.
+    A boolean indicating if a negative weight cycle exists.
+#### Pseudo-Code and Explanation
+```
+function Bellman-Ford(E, V, s):
+    // Step 1: Initialize distances from source to all vertices as infinite
+    // and distance to the source itself as 0
+    dist[] = array of size |V| with all values set to INF
+    pred[] = array of size |V| with all values set to NIL
+    dist[s] = 0
+    
+    // Step 2: Relax all edges |V|-1 times
+    for i from 1 to |V|-1:
+        for each edge (u, v, w) in E: // i.e u != v
+            if dist[u] + w < dist[v]:
+                dist[v] = dist[u] + w
+                pred[v] = u
+
+    // Step 3: Check for negative weight cycles
+    for each edge (u, v, w) in E:
+        if dist[u] + w < dist[v]:
+            // Negative weight cycle found
+            return (dist, pred, true)
+    
+    // No negative weight cycle found
+    return (dist, pred, false)
+```
+#### Time Complexity
+This algorithm has a time complexity O(|V||E|) i.e in worst case when |E| = |v|^2 , it is O(n^3)
+
+
+After
 # TODO
 Cant manage to fix transforms after 2 days of trying
 
