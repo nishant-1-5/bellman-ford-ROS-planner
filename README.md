@@ -1,6 +1,7 @@
 # Custom Bellman-Ford Planner for Navigation
 
 ## Note
+This project is incomplete, only includes functional code without any nodehandlers.
 This repository uses Ros-Noetic and Gazebo 11.11.0
 
 ## Basic Information
